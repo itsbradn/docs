@@ -3,6 +3,7 @@ import "../styles/docs.scss";
 import "../styles/main.scss";
 import { SEO } from "astro-seo";
 import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/500.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import ArrowRightIcon from "../components/icons/ArrowRightIcon.astro";
@@ -51,6 +52,12 @@ docs.forEach((v) => {
     !madeSections.includes(v.data.section) &&
     v.data.section !== section
   ) {
+    if (v.data.sectionTitleBefore) {
+      contents.push({
+        type: "title",
+        value: v.data.sectionTitleBefore
+      })
+    }
     contents.push({
       type: "link",
       toSlug: parseSlug(v.slug),

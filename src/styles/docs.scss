@@ -127,6 +127,16 @@
 }
 
 .astro-code {
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 8px;
+}
+
+a {
+  font-weight: 500;
+  color: #ff7994;
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 16px;
 }
