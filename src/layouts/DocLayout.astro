@@ -8,6 +8,10 @@ import "@fontsource/poppins/700.css";
 import ArrowRightIcon from "../components/icons/ArrowRightIcon.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
+type Props = CollectionEntry<"docs">["data"] & { slug: string };
+
+const { title, description, group, order, titleBefore, section } = Astro.props;
+
 interface ContentTitle {
   type: "title";
   value: string;
@@ -34,11 +38,28 @@ const parseSlug = (slug: string) => {
   return newSlug.startsWith("/") ? newSlug : "/" + newSlug;
 };
 
-const docs = (await getCollection("docs")).sort(
+let docs = (await getCollection("docs")).sort(
   (a, b) => (a.data.order ?? 9999) - (b.data.order ?? 9999)
 );
+
+if (section) docs = docs.filter((v) => v.data.section === section);
 let madeGroups: string[] = [];
+let madeSections: string[] = [];
 docs.forEach((v) => {
+  if (
+    v.data.section &&
+    !madeSections.includes(v.data.section) &&
+    v.data.section !== section
+  ) {
+    contents.push({
+      type: "link",
+      toSlug: parseSlug(v.slug),
+      value: v.data.section,
+    });
+    madeSections.push(v.data.section);
+    return;
+  }
+
   if (v.data.titleBefore) {
     contents.push({
       type: "title",
@@ -70,10 +91,6 @@ docs.forEach((v) => {
     value: v.data.title,
   });
 });
-
-type Props = CollectionEntry<"docs">["data"] & { slug: string };
-
-const { title, description } = Astro.props;
 ---
 
 <script>
@@ -158,6 +175,13 @@ const { title, description } = Astro.props;
     <main class="no-marg doc-table">
       <aside class="contents-table">
         <nav>
+          {
+            section !== undefined && (
+              <a href="/" class="contents__section">
+                <ArrowRightIcon /> {section}
+              </a>
+            )
+          }
           {
             contents.map((v) => {
               function renderData(data: ContentItem) {
