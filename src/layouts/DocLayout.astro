@@ -6,7 +6,7 @@ import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import ArrowRightIcon from "../components/icons/ArrowRightIcon.astro";
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from "astro:content";
 
 interface ContentTitle {
   type: "title";
@@ -35,19 +35,30 @@ interface Page {
 const contents: ContentItem[] = [];
 
 const parseSlug = (slug: string) => {
-  return slug === 'index' ? '/' : slug;
-}
+  const newSlug = slug === "index" ? "/" : slug;
+  return newSlug.startsWith("/") ? newSlug : "/" + newSlug;
+};
 
-const docs = (await getCollection('docs')).sort((a,b) => (a.data.order ?? 9999) - (b.data.order ?? 9999));
+const docs = (await getCollection("docs")).sort(
+  (a, b) => (a.data.order ?? 9999) - (b.data.order ?? 9999)
+);
 let madeGroups: string[] = [];
-docs.forEach(v => {
+docs.forEach((v) => {
   if (v.data.group) {
     if (madeGroups.includes(v.data.group.toLowerCase())) return;
     contents.push({
       type: "drop",
       value: v.data.group,
-      children: docs.filter(x => x.data.group?.toLowerCase() === v.data.group?.toLowerCase()).map(v => ({type: 'link', value: v.data.title, toSlug: parseSlug(v.slug)}))
-    })
+      children: docs
+        .filter(
+          (x) => x.data.group?.toLowerCase() === v.data.group?.toLowerCase()
+        )
+        .map((v) => ({
+          type: "link",
+          value: v.data.title,
+          toSlug: parseSlug(v.slug),
+        })),
+    });
     madeGroups.push(v.data.group.toLowerCase());
     return;
   }
@@ -56,7 +67,7 @@ docs.forEach(v => {
     toSlug: parseSlug(v.slug),
     value: v.data.title,
   });
-})
+});
 
 const pages: Page[] = [
   {
@@ -112,8 +123,7 @@ const pages: Page[] = [
   },
 ];
 
-
-type Props = CollectionEntry<'docs'>['data'] & {slug: string};
+type Props = CollectionEntry<"docs">["data"] & { slug: string };
 
 const { title, description } = Astro.props;
 const page = pages[0];
@@ -169,94 +179,87 @@ const page = pages[0];
   }
 </script>
 
-<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/favicon.ico" />
-		<title>{title}</title>
-		<SEO
-			title={title}
-			description={description}
-			charset="utf-8"
-			openGraph={{
-				basic: {
-					title: title as string + "tet",
-					type: "website",
-					image: "/favicon.svg",
-					
-				},
-				
-			}}
-			twitter={{
-				title,
-				description,
-				
-			}},
-			extend={{
-				meta: [
-					{ name: 'theme-color', content: '#FC5C7D'}
-				]
-			}}
-		/>
-	</head>
-	<body>
-  <header class="header">
-    <a href="/" class="header__logo"><h1>bradn</h1></a>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <SEO
+      title={title}
+      description={description}
+      charset="utf-8"
+      openGraph={{
+        basic: {
+          title: (title as string) + "tet",
+          type: "website",
+          image: "/favicon.svg",
+        },
+      }}
+      twitter={{
+        title,
+        description,
+      }}
+      ,
+      extend={{
+        meta: [{ name: "theme-color", content: "#FC5C7D" }],
+      }}
+    />
+  </head>
+  <body>
+    <header class="header">
+      <a href="/" class="header__logo"><h1>bradn</h1></a>
+    </header>
 
-  <main class="no-marg doc-table">
-    <aside class="contents-table">
-      <nav>
-        {
-          contents.map((v) => {
-            function renderData(data: ContentItem) {
-              switch (data.type) {
-                case "title": {
-                  return <span class="contents__title">{data.value}</span>;
-                }
-                case "link": {
-                  return (
-                    <a
-                      class="contents__link"
-                      href={
-                        (data.toSlug === undefined ? "" : data.toSlug)
-                      }
-                    >
-                      {data.value}
-                    </a>
-                  );
-                }
-                case "drop": {
-                  return (
-                    <div class="contents__drop">
-                      <button class="contents__link icon">
-                        <ArrowRightIcon /> <span>{data.value}</span>
-                      </button>
-                      <div class="drop__container">
-                        <div class="drop__content">
-                          {data.children.map((v) => renderData(v))}
+    <main class="no-marg doc-table">
+      <aside class="contents-table">
+        <nav>
+          {
+            contents.map((v) => {
+              function renderData(data: ContentItem) {
+                switch (data.type) {
+                  case "title": {
+                    return <span class="contents__title">{data.value}</span>;
+                  }
+                  case "link": {
+                    return (
+                      <a
+                        class="contents__link"
+                        href={data.toSlug === undefined ? "" : data.toSlug}
+                      >
+                        {data.value}
+                      </a>
+                    );
+                  }
+                  case "drop": {
+                    return (
+                      <div class="contents__drop">
+                        <button class="contents__link icon">
+                          <ArrowRightIcon /> <span>{data.value}</span>
+                        </button>
+                        <div class="drop__container">
+                          <div class="drop__content">
+                            {data.children.map((v) => renderData(v))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                }
-                default: {
-                  return;
+                    );
+                  }
+                  default: {
+                    return;
+                  }
                 }
               }
-            }
 
-            return renderData(v);
-          })
-        }
-      </nav>
-    </aside>
-    <div class="content">
-      <slot />
-    </div>
-    <aside class="page-contents"></aside>
-  </main>
-</body>
+              return renderData(v);
+            })
+          }
+        </nav>
+      </aside>
+      <div class="content">
+        <slot />
+      </div>
+      <aside class="page-contents"></aside>
+    </main>
+  </body>
 </html>
