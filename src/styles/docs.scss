@@ -11,10 +11,6 @@
     gap: 12px;
   }
 }
-
-.content {
-}
-
 .page-contents {
   width: 300px;
   height: calc(100vh - 82px);
@@ -128,4 +124,9 @@
       transform: translateX(-4px) rotate(180deg);
     }
   }
+}
+
+.astro-code {
+  padding: .5rem;
+  border-radius: 8px;
 }
