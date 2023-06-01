@@ -15,7 +15,8 @@
     "@fontsource/poppins": "^5.0.2",
     "astro": "^2.5.6",
     "astro-seo": "^0.7.2",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "vite-plugin-pwa": "^0.16.0"
   },
   "packageManager": "yarn@1.22.19"
 }
