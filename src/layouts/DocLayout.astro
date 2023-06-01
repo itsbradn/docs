@@ -27,11 +27,6 @@ interface ContentDrop {
 
 type ContentItem = ContentTitle | ContentLink | ContentDrop;
 
-interface Page {
-  slug: string | undefined;
-  contents: ContentItem[];
-}
-
 const contents: ContentItem[] = [];
 
 const parseSlug = (slug: string) => {
@@ -44,6 +39,13 @@ const docs = (await getCollection("docs")).sort(
 );
 let madeGroups: string[] = [];
 docs.forEach((v) => {
+  if (v.data.titleBefore) {
+    contents.push({
+      type: "title",
+      value: v.data.titleBefore,
+    });
+  }
+
   if (v.data.group) {
     if (madeGroups.includes(v.data.group.toLowerCase())) return;
     contents.push({
@@ -69,67 +71,9 @@ docs.forEach((v) => {
   });
 });
 
-const pages: Page[] = [
-  {
-    slug: undefined,
-    contents: [
-      {
-        type: "title",
-        value: "Overview",
-      },
-      {
-        type: "link",
-        toSlug: undefined,
-        value: "Overview",
-      },
-      {
-        type: "drop",
-        value: "Overview 2",
-        children: [
-          {
-            type: "link",
-            toSlug: "2",
-            value: "Overview",
-          },
-          {
-            type: "link",
-            toSlug: "4",
-            value: "Overview",
-          },
-          {
-            type: "drop",
-            value: "Overview 2",
-            children: [
-              {
-                type: "link",
-                toSlug: "2",
-                value: "Overview",
-              },
-              {
-                type: "link",
-                toSlug: "4",
-                value: "Overview",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: "link",
-        toSlug: "3",
-        value: "Overview 3",
-      },
-    ],
-  },
-];
-
 type Props = CollectionEntry<"docs">["data"] & { slug: string };
 
 const { title, description } = Astro.props;
-const page = pages[0];
-// const { slug } = Astro.params;
-// const page = pages.find((page) => page.slug === slug);
-// if (!page) return Astro.redirect("/404");
 ---
 
 <script>

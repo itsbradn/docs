@@ -7,6 +7,7 @@ const docs = defineCollection({
     description: z.string(),
     group: z.string().optional(),
     order: z.number().optional(),
+    titleBefore: z.string().optional(),
     // Transform string to Date object
 	}),
 	
