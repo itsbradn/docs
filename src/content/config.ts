@@ -5,17 +5,11 @@ const docs = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    group: z.string().optional(),
+    order: z.number().optional(),
     // Transform string to Date object
-    pubDate: z
-      .string()
-      .or(z.date())
-      .transform((val) => new Date(val)),
-    updatedDate: z
-      .string()
-      .optional()
-      .transform((str) => (str ? new Date(str) : undefined)),
-    heroImage: z.string().optional(),
-  }),
+	}),
+	
 });
 
 export const collections = { docs };

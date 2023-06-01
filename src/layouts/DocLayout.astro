@@ -6,7 +6,7 @@ import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 import ArrowRightIcon from "../components/icons/ArrowRightIcon.astro";
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface ContentTitle {
   type: "title";
@@ -31,6 +31,32 @@ interface Page {
   slug: string | undefined;
   contents: ContentItem[];
 }
+
+const contents: ContentItem[] = [];
+
+const parseSlug = (slug: string) => {
+  return slug === 'index' ? '/' : slug;
+}
+
+const docs = (await getCollection('docs')).sort((a,b) => (a.data.order ?? 9999) - (b.data.order ?? 9999));
+let madeGroups: string[] = [];
+docs.forEach(v => {
+  if (v.data.group) {
+    if (madeGroups.includes(v.data.group.toLowerCase())) return;
+    contents.push({
+      type: "drop",
+      value: v.data.group,
+      children: docs.filter(x => x.data.group?.toLowerCase() === v.data.group?.toLowerCase()).map(v => ({type: 'link', value: v.data.title, toSlug: parseSlug(v.slug)}))
+    })
+    madeGroups.push(v.data.group.toLowerCase());
+    return;
+  }
+  contents.push({
+    type: "link",
+    toSlug: parseSlug(v.slug),
+    value: v.data.title,
+  });
+})
 
 const pages: Page[] = [
   {
@@ -87,10 +113,9 @@ const pages: Page[] = [
 ];
 
 
-type Props = CollectionEntry<'docs'>['data'];
+type Props = CollectionEntry<'docs'>['data'] & {slug: string};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
-console.log(title);
+const { title, description } = Astro.props;
 const page = pages[0];
 // const { slug } = Astro.params;
 // const page = pages.find((page) => page.slug === slug);
@@ -108,7 +133,7 @@ const page = pages[0];
   let path = parsePath(window.location.pathname);
   const linkEls = document.querySelectorAll(".contents__link");
   linkEls.forEach((v) => {
-    const elPath = parsePath(v.getAttribute("href") ?? "/");
+    const elPath = parsePath(v.getAttribute("href") ?? "group");
     if (elPath === path) v.classList.add("active");
   });
 
@@ -185,7 +210,7 @@ const page = pages[0];
     <aside class="contents-table">
       <nav>
         {
-          page.contents.map((v) => {
+          contents.map((v) => {
             function renderData(data: ContentItem) {
               switch (data.type) {
                 case "title": {
@@ -196,7 +221,6 @@ const page = pages[0];
                     <a
                       class="contents__link"
                       href={
-                        "/docs/" +
                         (data.toSlug === undefined ? "" : data.toSlug)
                       }
                     >
