@@ -1,7 +1,5 @@
 # Documentation & Guides
 
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 ## 🔧 Development
 
 ### Prerequisites
