@@ -1,0 +1,476 @@
+openapi: 3.0.3
+info:
+  title: bradn's API
+  description: |-
+    ## Rate Limiting
+    
+    Certain routes will limit the amount of requests you can send per 10 second intervals. These limits can be changed by contacting bradn and requesting an API key.
+    
+    Limits are per IP address or per key. For example the route of /api/v1/minecraft/* is limited to 20 requests per 10 seconds.
+    | Number of Requests | Resources | Time Window | Status Code Returned when Threshold Exceeds |
+    |--|--|--|--|
+    | 2000 | Per IP | Per minute | HTTP 429 |
+  termsOfService: ''
+  contact:
+    name: 'bradn'
+    url: 'https://www.bradn.dev/'
+  license:
+    name: ''
+  version: 1.0.0
+externalDocs:
+  description: View our minecraft site
+  url: https://mc.bradn.dev/
+servers:
+  - url: https://api.bradn.dev/api/v1
+tags:
+  - name: Minecraft
+    description: Minecraft and Hypixel related routes
+    externalDocs:
+      description: View site
+      url: https://mc.bradn.dev/
+paths:
+  /minecraft/player/{username}:
+    get:
+      tags:
+        - Minecraft
+      summary: Get a minecraft player
+      description: Get a minecraft player by username
+      operationId: getMinecraftPlayer
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: valid Mojang player username
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MojangPlayer'
+        '400':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid Mojang API Response
+        '401':
+          description: Invalid player supplied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid player
+  /minecraft/landing:
+    get:
+      tags:
+        - Minecraft
+      summary: Get landing page information
+      description: |-
+        Get landing page information including:
+        
+        - The site creator
+        - The most viewed user of all time
+        - The user thats data was most recently updated
+        - The user with the highest K/D
+        - The user with the highest Hypixel Karma
+        - The user with the highest Hypixel Network Level
+      operationId: getMinecraftLanding
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MinecraftLanding'
+        '400':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+  /minecraft/texture/{texture}:
+    get:
+      tags:
+        - Minecraft
+      summary: Get the png of a minecraft texture
+      description: |-
+        Get the png of a minecraft texture
+      parameters:
+        - in: path
+          name: texture
+          schema:
+            type: string
+          required: true
+          description: valid Mojang texture id
+      operationId: getMojangTexture
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Invalid mojang texture ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid Texture ID"
+  /minecraft/hypixel/{uuid}:
+    get:
+      tags:
+        - Minecraft
+      summary: Get a players hypixel stats
+      description: Get a Hypixel stats by uuid
+      operationId: getHypixelPlayer
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            minLength: 32
+            maxLength: 32
+          required: true
+          description: valid Mojang player uuid without dashes
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HypixelPlayer'
+        '400':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+        '401':
+          description: Invalid player supplied
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Invalid player
+components:
+  schemas:
+    MojangPlayer:
+      type: object
+      properties:
+        uuid:
+          type: string
+          minLength: 32
+          maxLength: 32
+          example: 5508a57b74694d09860074b87d548fc7
+        username:
+          type: string
+          example: bradn
+        skin: 
+          type: object
+          properties:
+            url:
+              type: string
+              example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            id:
+              type: string
+              example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+        cape: 
+          type: object
+          properties:
+            url:
+              type: string
+              example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+            id:
+              type: string
+              example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+        mojangCacheUntil:
+          type: string
+          format: date-time
+        views:
+          type: integer
+          example: 999
+    MinecraftLanding:
+      type: object
+      properties:
+        creator:
+          type: object
+          properties:
+            username:
+              type: string
+              example: bradn
+            uuid:
+              type: string
+              minLength: 32
+              maxLength: 32
+              example: 5508a57b74694d09860074b87d548fc7
+            skin: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+                id:
+                  type: string
+                  example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            cape: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+                id:
+                  type: string
+                  example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+        mostViewed:
+          type: object
+          properties:
+            username:
+              type: string
+              example: bradn
+            uuid:
+              type: string
+              minLength: 32
+              maxLength: 32
+              example: 5508a57b74694d09860074b87d548fc7
+            skin: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+                id:
+                  type: string
+                  example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            cape: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+                id:
+                  type: string
+                  example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+            views:
+              type: number
+              example: 900
+        recentlyUpdated:
+          type: object
+          properties:
+            username:
+              type: string
+              example: bradn
+            uuid:
+              type: string
+              minLength: 32
+              maxLength: 32
+              example: 5508a57b74694d09860074b87d548fc7
+            skin: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+                id:
+                  type: string
+                  example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            cape: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+                id:
+                  type: string
+                  example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+        highestKD:
+          type: object
+          properties:
+            username:
+              type: string
+              example: bradn
+            uuid:
+              type: string
+              minLength: 32
+              maxLength: 32
+              example: 5508a57b74694d09860074b87d548fc7
+            skin: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+                id:
+                  type: string
+                  example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            cape: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+                id:
+                  type: string
+                  example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+        highestKarma:
+          type: object
+          properties:
+            username:
+              type: string
+              example: bradn
+            uuid:
+              type: string
+              minLength: 32
+              maxLength: 32
+              example: 5508a57b74694d09860074b87d548fc7
+            skin: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+                id:
+                  type: string
+                  example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            cape: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+                id:
+                  type: string
+                  example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+        highestLevel:
+          type: object
+          properties:
+            username:
+              type: string
+              example: bradn
+            uuid:
+              type: string
+              minLength: 32
+              maxLength: 32
+              example: 5508a57b74694d09860074b87d548fc7
+            skin: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+                id:
+                  type: string
+                  example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
+            cape: 
+              type: object
+              properties:
+                url:
+                  type: string
+                  example: https://api.bradn.dev/api/v1/minecraft/texture/2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+                id:
+                  type: string
+                  example: 2340c0e03dd24a11b15a8b33c2a7e9e32abb2051b2481d0ba7defd635ca7a933
+            level:
+              type: number
+              example: 153
+    HypixelPlayer:
+      type: object
+      properties:
+        uuid:
+          type: string
+          minLength: 32
+          maxLength: 32
+          example: 5508a57b74694d09860074b87d548fc7
+        online:
+          type: boolean
+          example: false
+        currentlyPlaying:
+          type: string
+          example: null
+        newPackageRank:
+          type: string
+          example: MVP_PLUS
+        monthlyPackageRank:
+          type: string
+          example: NONE
+        rankPlusColor:
+          type: string
+          example: DARK_AQUA
+        monthlyRankColor:
+          type: string
+          example: GOLD
+        firstLogin:
+          type: number
+          example: 1371506158000
+        lastLogin:
+          type: number
+          example: 1687919448937
+        achievementPoints:
+          type: number
+          example: 5040
+        totalRewards:
+          type: number
+          example: 114
+        totalDailyRewards:
+          type: number
+          example: 98
+        rewardStreak:
+          type: number
+          example: 1
+        rewardScore:
+          type: number
+          example: 1
+        level:
+          type: number
+          example: 159.05
+        karma:
+          type: number
+          example: 11639290
+        experience:
+          type: number
+          example: 32609117
+        expToNextLevel:
+          type: number
+          example: 402500
+        levelExpFloor:
+          type: number
+          example: 32587500
+        levelProgress:
+          type: number
+          example: 5.37
+        games:
+          type: object
+          properties:
+            tntGames:
+              type: object
+            bedwars:
+              type: object
+            buildBattle:
+              type: object
+            murderMystery:
+              type: object

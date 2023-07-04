@@ -1,0 +1,227 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] :is(.token.punctuation, .token.operator) {
+  color: inherit !important;
+}
+
+[data-theme="dark"] :is(.token.comment) {
+  color: #8b949e !important;
+}
+
+[data-theme="dark"] :is(.token.constant) {
+  color: #79c0ff !important;
+}
+
+[data-theme="dark"] :is(.token.entity) {
+  color: #d2a8ff !important;
+}
+
+[data-theme="dark"] :is(.token.keyword) {
+  color: #ff7b72 !important;
+}
+
+[data-theme="dark"] :is(.token.string) {
+  color: #a5d6ff !important;
+}
+
+[data-theme="dark"] :is(.token.variable) {
+  color: #ffa198 !important;
+}
+
+[data-theme="dark"] :is(.token.operator) {
+  color: #ff7b72 !important;
+}
+
+[data-theme="dark"] :is(.token.console) {
+  color: inherit !important;
+}
+
+[data-theme="dark"] :is(.token.console) {
+  color: inherit !important;
+}
+
+[data-theme="dark"] :is(.token.method, .token.function) {
+  color: #d2a8ff !important;
+}
+
+[data-theme="dark"] :is(.token.property) {
+  color: #79c0ff !important;
+}
+
+[data-theme="dark"] :is(.token.number) {
+  color: rgb(255, 132, 132) !important;
+}
+
+main > * > * > * > * {
+  min-height: calc(100vh - 80px);
+}
+
+:root {
+  --text-900: #4a4a4f;
+  --text-800: #545359;
+  --text-700: #5d5c63;
+  --text-600: #6d6c73;
+  --text-500: #7d7d82;
+  --text-400: #8e8d92;
+  --text-300: #aeaeb1;
+  --text-200: #ceced0;
+  --text-100: #ffffff;
+
+  --border-color: #151416;
+  --border-color-light: #252427;
+
+  --color-canvas: rgb(6, 12, 17) !important;
+  --color-canvas-50: #1a1e29 !important;
+  --color-canvas-100: #12151d !important;
+  --color-canvas-200: #171a24 !important;
+  --color-canvas-300: #1a1e29 !important;
+  --color-canvas-400: #1a1e29 !important;
+  --color-canvas-500: #1a1e29 !important;
+  --ifm-table-border-color: #2e2d31 !important;
+  --ifm-table-head-background: #171a24 !important;
+  --ifm-code-background: transparent !important;
+}
+body {
+  background: rgb(26, 33, 45);
+}
+
+[data-theme="dark"] {
+  --color-canvas: rgb(6, 12, 17) !important;
+  --color-canvas-50: #1a1e29 !important;
+  --color-canvas-100: #12151d !important;
+  --color-canvas-200: #171a24 !important;
+  --color-canvas-300: #1a1e29 !important;
+  --color-canvas-400: #1a1e29 !important;
+  --color-canvas-500: #1a1e29 !important;
+  --ifm-table-border-color: #2e2d31 !important;
+  --ifm-table-head-background: #171a24 !important;
+  --ifm-code-background: transparent !important;
+}
+
+[data-theme="dark"] .sl-inverted {
+  --color-canvas: rgb(6, 12, 17) !important;
+  --color-canvas-50: #1a1e29 !important;
+  --color-canvas-100: #12151d !important;
+  --color-canvas-200: #171a24 !important;
+  --color-canvas-300: #1a1e29 !important;
+  --color-canvas-400: #1a1e29 !important;
+  --color-canvas-500: #1a1e29 !important;
+  --ifm-table-border-color: #2e2d31 !important;
+  --ifm-table-head-background: #171a24 !important;
+  --ifm-code-background: transparent !important;
+}
+
+.sl-resize-x {
+  margin-right: -7px;
+  background-color: rgb(14, 19, 27);
+}
+
+.header {
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(49, 62, 84, 0.5);
+  background: rgba(#12151d, 0.5);
+  position: sticky;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 82px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  &__logo {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    background: transparent;
+    border: none;
+    color: var(--text-100);
+    text-decoration: none;
+    cursor: pointer;
+
+    > h1 {
+      margin: 0;
+      padding: 0;
+      font-size: inherit;
+    }
+  }
+
+  &__nav {
+    > ul {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2rem;
+    }
+  }
+
+  &__nav-btn {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: transparent;
+    border: none;
+    color: var(--text-200);
+    transition: color 100ms ease-in-out;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--text-100);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    &__nav {
+      > ul {
+        gap: 1rem;
+      }
+    }
+
+    &__nav-btn {
+      font-size: 14px;
+    }
+  }
+}

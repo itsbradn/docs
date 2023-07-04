@@ -1,64 +1,41 @@
-# Documentation & Guides
+# Website
 
-## 🔧 Development
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-### Prerequisites
-- git CLI
-- NodeJS 19.7.0
-- Yarn
+### Installation
 
-Clone the repository and cd into it.
 ```
-git clone https://github.com/itsbradn/docs.git
-cd website
+$ yarn
 ```
 
-Install dependencies
+### Local Development
+
 ```
-yarn install
+$ yarn start
 ```
 
-Start development server at `localhost:3000`
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
+
 ```
-yarn run dev
+$ yarn build
 ```
 
-✨ Congrats! You have a working development server
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Deployment
 
-## 🚀 Production
+Using SSH:
 
-### Prerequisites
-- git CLI
-- NodeJS 19.7.0
-- Yarn
-
-Clone the repository and cd into it.
 ```
-git clone https://github.com/itsbradn/docs.git
-cd website
+$ USE_SSH=true yarn deploy
 ```
 
-Install dependencies
+Not using SSH:
+
 ```
-yarn install
+$ GIT_USER=<Your GitHub username> yarn deploy
 ```
 
-Build website
-```
-yarn run build
-```
-
-Preview cloudflare pages
-```
-yarn run preview
-```
-
-**OR**
-
-Preview astro server
-```
-yarn run preview-astro
-```
-
-## Feel free to check [astro documentation](https://docs.astro.build).
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
