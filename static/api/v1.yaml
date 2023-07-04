@@ -9,7 +9,7 @@ info:
     Limits are per IP address or per key. For example the route of /api/v1/minecraft/* is limited to 20 requests per 10 seconds.
     | Number of Requests | Resources | Time Window | Status Code Returned when Threshold Exceeds |
     |--|--|--|--|
-    | 2000 | Per IP | Per minute | HTTP 429 |
+    | 120 | Per IP | Per minute | HTTP 429 |
   termsOfService: ''
   contact:
     name: 'bradn'
