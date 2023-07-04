@@ -11,19 +11,19 @@ info:
     That being said, any other minecraft route is totally okay for you to use, and I will happily provide support for it in my discord server.
 
     ## Rate Limiting
-    
+
     Certain routes will limit the amount of requests you can send per 10 second intervals. These limits can be changed by contacting bradn and requesting an API key.
-    
+
     Limits are per IP address or per key. For example the route of /api/v1/minecraft/* is limited to 20 requests per 10 seconds.
     | Number of Requests | Resources | Time Window | Status Code Returned when Threshold Exceeds |
     |--|--|--|--|
     | 120 | Per IP | Per minute | HTTP 429 |
-  termsOfService: ''
+  termsOfService: ""
   contact:
-    name: 'bradn'
-    url: 'https://www.bradn.dev/'
+    name: "bradn"
+    url: "https://www.bradn.dev/"
   license:
-    name: ''
+    name: ""
   version: 1.0.0
 externalDocs:
   description: View our minecraft site
@@ -52,13 +52,13 @@ paths:
           required: true
           description: valid Mojang player username
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MojangPlayer'
-        '400':
+                $ref: "#/components/schemas/MojangPlayer"
+        "400":
           description: Server error
           content:
             application/json:
@@ -68,7 +68,7 @@ paths:
                   error:
                     type: string
                     example: Invalid Mojang API Response
-        '401':
+        "401":
           description: Invalid player supplied
           content:
             application/json:
@@ -85,7 +85,7 @@ paths:
       summary: Get landing page information
       description: |-
         Get landing page information including:
-        
+
         - The site creator
         - The most viewed user of all time
         - The user thats data was most recently updated
@@ -94,13 +94,13 @@ paths:
         - The user with the highest Hypixel Network Level
       operationId: getMinecraftLanding
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MinecraftLanding'
-        '400':
+                $ref: "#/components/schemas/MinecraftLanding"
+        "400":
           description: Server error
           content:
             application/json:
@@ -126,14 +126,14 @@ paths:
           description: valid Mojang texture id
       operationId: getMojangTexture
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             image/png:
               schema:
                 type: string
                 format: binary
-        '401':
+        "401":
           description: Invalid mojang texture ID
           content:
             application/json:
@@ -160,13 +160,13 @@ paths:
           required: true
           description: valid Mojang player uuid without dashes
       responses:
-        '200':
+        "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HypixelPlayer'
-        '400':
+                $ref: "#/components/schemas/HypixelPlayer"
+        "400":
           description: Server error
           content:
             application/json:
@@ -176,7 +176,7 @@ paths:
                   error:
                     type: string
                     example: Internal Server Error
-        '401':
+        "401":
           description: Invalid player supplied
           content:
             application/json:
@@ -199,7 +199,7 @@ components:
         username:
           type: string
           example: bradn
-        skin: 
+        skin:
           type: object
           properties:
             url:
@@ -208,7 +208,7 @@ components:
             id:
               type: string
               example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-        cape: 
+        cape:
           type: object
           properties:
             url:
@@ -237,7 +237,7 @@ components:
               minLength: 32
               maxLength: 32
               example: 5508a57b74694d09860074b87d548fc7
-            skin: 
+            skin:
               type: object
               properties:
                 url:
@@ -246,7 +246,7 @@ components:
                 id:
                   type: string
                   example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-            cape: 
+            cape:
               type: object
               properties:
                 url:
@@ -266,7 +266,7 @@ components:
               minLength: 32
               maxLength: 32
               example: 5508a57b74694d09860074b87d548fc7
-            skin: 
+            skin:
               type: object
               properties:
                 url:
@@ -275,7 +275,7 @@ components:
                 id:
                   type: string
                   example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-            cape: 
+            cape:
               type: object
               properties:
                 url:
@@ -298,7 +298,7 @@ components:
               minLength: 32
               maxLength: 32
               example: 5508a57b74694d09860074b87d548fc7
-            skin: 
+            skin:
               type: object
               properties:
                 url:
@@ -307,7 +307,7 @@ components:
                 id:
                   type: string
                   example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-            cape: 
+            cape:
               type: object
               properties:
                 url:
@@ -327,7 +327,7 @@ components:
               minLength: 32
               maxLength: 32
               example: 5508a57b74694d09860074b87d548fc7
-            skin: 
+            skin:
               type: object
               properties:
                 url:
@@ -336,7 +336,7 @@ components:
                 id:
                   type: string
                   example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-            cape: 
+            cape:
               type: object
               properties:
                 url:
@@ -356,7 +356,7 @@ components:
               minLength: 32
               maxLength: 32
               example: 5508a57b74694d09860074b87d548fc7
-            skin: 
+            skin:
               type: object
               properties:
                 url:
@@ -365,7 +365,7 @@ components:
                 id:
                   type: string
                   example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-            cape: 
+            cape:
               type: object
               properties:
                 url:
@@ -385,7 +385,7 @@ components:
               minLength: 32
               maxLength: 32
               example: 5508a57b74694d09860074b87d548fc7
-            skin: 
+            skin:
               type: object
               properties:
                 url:
@@ -394,7 +394,7 @@ components:
                 id:
                   type: string
                   example: 85ce8f2900ca89541c4b42c41472a19fba0e92841101aa0224a6c904636f5ce8
-            cape: 
+            cape:
               type: object
               properties:
                 url:
@@ -476,9 +476,208 @@ components:
           properties:
             tntGames:
               type: object
+              properties:
+                wins:
+                  type: number
+                  example: 191
+                winstreak:
+                  type: number
+                  example: 0
+                coins:
+                  type: number
+                  example: 170999
+                particleEffect:
+                  type: string
+                  example: Music
+                deathEffect:
+                  type: string
+                  example: Heart aura
+                voidMessage:
+                  type: string
+                  example: Blackhole
+                hat:
+                  type: string
+                  example: Explosive Cap
+                doubleJumpEffect:
+                  type: string
+                  example: Smoke
+                playtime:
+                  type: string
+                  example: 553 hours and 9 minutes
+                settings:
+                  type: object
+                  properties:
+                    wizardsActionBar:
+                      type: string
+                      example: True
+                    runActionBar:
+                      type: string
+                      example: False
+                    tagActionBar:
+                      type: string
+                      example: True
+                    tipHolograms:
+                      type: string
+                      example: True
+                    wizardsCooldownMessages:
+                      type: string
+                      example: True
+                    doubleJumpFeather:
+                      type: string
+                      example: True
+                    wizardsPrestigeParticles:
+                      type: string
+                      example: True
+                modes:
+                  type: object
+                  properties:
+                    bowSpleef:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 0
+                        deaths:
+                          type: number
+                          example: 28
+                        shotsLanded:
+                          type: number
+                          example: 620
+                        winLossRatio:
+                          type: number
+                          example: 0
+                        shotsGameRatio:
+                          type: number
+                          example: 22.142857142857142
+                    tntRun:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 0
+                        deaths:
+                          type: number
+                          example: 52
+                        record:
+                          type: string
+                          example: 6 minutes and 9 seconds
+                        winLossRatio:
+                          type: number
+                          example: 0
+                        blocksRan:
+                          type: number
+                          example: 14319
+                        potionsLanded:
+                          type: number
+                          example: 16
+                    pvpRun:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 0
+                        kills:
+                          type: number
+                          example: 6
+                        deaths:
+                          type: number
+                          example: 11
+                        record:
+                          type: string
+                          example: No record
+                        winLossRatio:
+                          type: number
+                          example: 0
+                        killDeathRatio:
+                          type: number
+                          example: 0.5454545454545454
+                        killGameRatio:
+                          type: number
+                          example: 0.5454545454545454
+                    tntTag:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 191
+                        kills:
+                          type: number
+                          example: 3606
+                        deaths:
+                          type: number
+                          example: 236
+                        tags:
+                          type: number
+                          example: 36549
+                        tagKillRatio:
+                          type: number
+                          example: 10.135607321131447
+                        killWinRatio:
+                          type: number
+                          example: 18.87958115183246
+                        winLossRatio:
+                          type: number
+                          example: 0.809322033898305
+                    wizards:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 0
+                        kills:
+                          type: number
+                          example: 0
+                        deaths:
+                          type: number
+                          example: 5
+                        assists:
+                          type: number
+                          example: 1
+                        classes:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              class:
+                                type: string
+                                example: Hydro
+                                description: |-
+                                  Could be any of the following keys: 
+
+                                  Ancient, Blood, Fire, Hydro, Ice, Kinetic, Storm, Toxic, Wither
+                              kills:
+                                type: number
+                                example: 0
+                              deaths:
+                                type: number
+                                example: 0
+                              assists:
+                                type: number
+                                example: 0
+                              killDeathRatio:
+                                type: number
+                                example: 0
+                              healed:
+                                type: number
+                                example: 0
+                              damageReceived:
+                                type: number
+                                example: 0
+                              power:
+                                type: number
+                                example: 0
+                              mana:
+                                type: number
+                                example: 0
+                              prestige:
+                                type: string
+                                example: False
             bedwars:
               type: object
+              description: Object is empty until I get time to fill out the data
             buildBattle:
               type: object
+              description: Object is empty until I get time to fill out the data
             murderMystery:
               type: object
+              description: Object is empty until I get time to fill out the data
