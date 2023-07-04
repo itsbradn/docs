@@ -2,6 +2,14 @@ openapi: 3.0.3
 info:
   title: bradn's API
   description: |-
+    ## Hypixel API Notice
+
+    Due to Hypixels new API policies proxying the api to 3rd party users is not allowed therefor we cannot condone you use any Hypixel related routes on your own site. 
+    If this becomes a problem we reserve the right to block certain IPs or domains. 
+    I would love to allow users to use our API but due to hypixel's terms we cannot condone it.
+
+    That being said, any other minecraft route is totally okay for you to use, and I will happily provide support for it in my discord server.
+
     ## Rate Limiting
     
     Certain routes will limit the amount of requests you can send per 10 second intervals. These limits can be changed by contacting bradn and requesting an API key.
