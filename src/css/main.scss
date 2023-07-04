@@ -1,24 +1,5 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme="dark"] {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
@@ -29,55 +10,55 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-[data-theme="dark"] :is(.token.punctuation, .token.operator) {
+ :is(.token.punctuation, .token.operator) {
   color: inherit !important;
 }
 
-[data-theme="dark"] :is(.token.comment) {
+ :is(.token.comment) {
   color: #8b949e !important;
 }
 
-[data-theme="dark"] :is(.token.constant) {
+ :is(.token.constant) {
   color: #79c0ff !important;
 }
 
-[data-theme="dark"] :is(.token.entity) {
+ :is(.token.entity) {
   color: #d2a8ff !important;
 }
 
-[data-theme="dark"] :is(.token.keyword) {
+ :is(.token.keyword) {
   color: #ff7b72 !important;
 }
 
-[data-theme="dark"] :is(.token.string) {
+ :is(.token.string) {
   color: #a5d6ff !important;
 }
 
-[data-theme="dark"] :is(.token.variable) {
+ :is(.token.variable) {
   color: #ffa198 !important;
 }
 
-[data-theme="dark"] :is(.token.operator) {
+ :is(.token.operator) {
   color: #ff7b72 !important;
 }
 
-[data-theme="dark"] :is(.token.console) {
+ :is(.token.console) {
   color: inherit !important;
 }
 
-[data-theme="dark"] :is(.token.console) {
+ :is(.token.console) {
   color: inherit !important;
 }
 
-[data-theme="dark"] :is(.token.method, .token.function) {
+ :is(.token.method, .token.function) {
   color: #d2a8ff !important;
 }
 
-[data-theme="dark"] :is(.token.property) {
+ :is(.token.property) {
   color: #79c0ff !important;
 }
 
-[data-theme="dark"] :is(.token.number) {
+ :is(.token.number) {
   color: rgb(255, 132, 132) !important;
 }
 
@@ -114,7 +95,7 @@ body {
   background: rgb(26, 33, 45);
 }
 
-[data-theme="dark"] {
+:root {
   --color-canvas: rgb(6, 12, 17) !important;
   --color-canvas-50: #1a1e29 !important;
   --color-canvas-100: #12151d !important;
@@ -127,7 +108,7 @@ body {
   --ifm-code-background: transparent !important;
 }
 
-[data-theme="dark"] .sl-inverted {
+ .sl-inverted {
   --color-canvas: rgb(6, 12, 17) !important;
   --color-canvas-50: #1a1e29 !important;
   --color-canvas-100: #12151d !important;

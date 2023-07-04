@@ -23,6 +23,9 @@ export default function Home(): JSX.Element {
             />
           )}
         </BrowserOnly>
+        <BrowserOnly>
+          {() => <script>document.documentElement.setAttribute('data-theme', 'dark')</script>}
+        </BrowserOnly>
       </main>
     </>
   );
