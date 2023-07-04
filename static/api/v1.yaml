@@ -407,6 +407,13 @@ components:
               type: number
               example: 153
     HypixelPlayer:
+      description: |-
+        I cannot officially condone using this data on your own sites due to hypixel's api policies, however I am documenting this since my project is still an open source project and people may need it.
+
+        I will only provide support for this data if you are self hosting my code, not if you are using my api route.
+        Data should always be accurate, if you find an issue please contact me immediately so I can fix it.
+
+        Visit my discord [here](https://discord.gg/RcdcNxR4ez) for support or similar.
       type: object
       properties:
         uuid:
@@ -677,7 +684,58 @@ components:
               description: Object is empty until I get time to fill out the data
             buildBattle:
               type: object
-              description: Object is empty until I get time to fill out the data
+              properties:
+                wins:
+                  type: number
+                  example: 6
+                coins:
+                  type: number
+                  example: 90843
+                gamesPlayed:
+                  type: number
+                  example: 60
+                winsGamesPlayed:
+                  type: number
+                  example: 0.1
+                timesVoted:
+                  type: number
+                  example: 200
+                score:
+                  type: number
+                  example: 430
+                modes:
+                  type: object
+                  properties:
+                    soloNormal:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 4
+                    soloPro:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 0
+                    teamsNormal:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 0
+                        highestPoints:
+                          type: number
+                          example: 182
+                    guessTheBuild:
+                      type: object
+                      properties:
+                        wins:
+                          type: number
+                          example: 2
+                        correctGuesses:
+                          type: number
+                          example: 51
             murderMystery:
               type: object
               description: Object is empty until I get time to fill out the data
