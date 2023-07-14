@@ -18,7 +18,6 @@ info:
     | Number of Requests | Resources | Time Window | Status Code Returned when Threshold Exceeds |
     |--|--|--|--|
     | 120 | Per IP | Per minute | HTTP 429 |
-  termsOfService: ""
   contact:
     name: "bradn"
     url: "https://www.bradn.dev/"
@@ -414,6 +413,13 @@ components:
         Data should always be accurate, if you find an issue please contact me immediately so I can fix it.
 
         Visit my discord [here](https://discord.gg/RcdcNxR4ez) for support or similar.
+
+        Some quick notes:
+        - All ratios are **NOT** rounded.
+        - All keys will be in camelCase with no exceptions (Hypixel API does a terrible job with this.)
+        - No values should return null or undefined, if they do please contact me.
+        - All keys should follow the same naming scheme, If I made a mistake please contact me.
+        - Breaking changes shouldn't ever happen but it is possible. I will try to use version changes in the URI if things will break.
       type: object
       properties:
         uuid:
@@ -681,7 +687,366 @@ components:
                                 example: False
             bedwars:
               type: object
-              description: Object is empty until I get time to fill out the data
+              properties:
+                gamesPlayed:
+                  type: number
+                  example: 1339
+                dreamGamesPlayed:
+                  type: number
+                  example: 93
+                overallGamesPlayed:
+                  type: number
+                  example: 1432
+                level:
+                  type: number
+                  example: 90.3672
+                experience:
+                  type: number
+                  example: 438836
+                experienceGameRatio:
+                  type: number
+                  example: 327.7341299477222
+                experienceWinRatio:
+                  type: number
+                  example: 634.1560693641618
+                lootChests:
+                  type: number
+                  example: 34
+                lootChestTypes:
+                  type: object
+                  properties:
+                    lootChests:
+                      type: number
+                      example: 31
+                    lunarChests:
+                      type: number
+                      example: 0
+                    halloweenChests:
+                      type: number
+                      example: 0
+                    christmasChests:
+                      type: number
+                      example: 3
+                    easterChests:
+                      type: number
+                      example: 0
+                coins:
+                  type: number
+                  example: 186833
+                winstreak:
+                  type: number
+                  example: 3
+                wins:
+                  type: number
+                  example: 692
+                losses:
+                  type: number
+                  example: 631
+                winLossRatio:
+                  type: number
+                  example: 1.0966719492868462
+                kills:
+                  type: number
+                  example: 4039
+                deaths:
+                  type: number
+                  example: 5114
+                killDeathRatio:
+                  type: number
+                  example: 0.7897927258506062
+                killWinRatio:
+                  type: number
+                  example: 5.836705202312139
+                killGameRatio:
+                  type: number
+                  example: 3.0164301717699775
+                finalKills:
+                  type: number
+                  example: 2252
+                finalDeaths:
+                  type: number
+                  example: 661
+                finalKillDeathRatio:
+                  type: number
+                  example: 3.4069591527987897
+                finalKillWinRatio:
+                  type: number
+                  example: 3.254335260115607
+                finalKillGameRatio:
+                  type: number
+                  example: 1.6818521284540702
+                bedsBroken:
+                  type: number
+                  example: 938
+                bedsLost:
+                  type: number
+                  example: 737
+                bedsBrokenBedsLostRatio:
+                  type: number
+                  example: 1.2727272727272727
+                bedsBrokenGameRatio:
+                  type: number
+                  example: 0.700522778192681
+                bedsBrokenWinRatio:
+                  type: number
+                  example: 1.3554913294797688
+                voidFinalKills:
+                  type: number
+                  example: 807
+                voidFinalDeaths:
+                  type: number
+                  example: 263
+                voidFinalKillDeathRatio:
+                  type: number
+                  example: 3.068441064638783
+                meleeFinalKills:
+                  type: number
+                  example: 1379
+                meleeFinalDeaths:
+                  type: number
+                  example: 360
+                meleeFinalKillDeathRatio:
+                  type: number
+                  example: 3.8305555555555557
+                magicFinalKills:
+                  type: number
+                  example: 21
+                magicFinalDeaths:
+                  type: number
+                  example: 14
+                magicFinalKillDeathRatio:
+                  type: number
+                  example: 1.5
+                fallFinalKills:
+                  type: number
+                  example: 41
+                fallFinalDeaths:
+                  type: number
+                  example: 17
+                fallFinalKillDeathRatio:
+                  type: number
+                  example: 1.5
+                voidKills:
+                  type: number
+                  example: 2085
+                voidDeaths:
+                  type: number
+                  example: 2648
+                voidKillDeathRatio:
+                  type: number
+                  example: 0.7873867069486404
+                meleeKills:
+                  type: number
+                  example: 1820
+                meleeDeaths:
+                  type: number
+                  example: 2305
+                meleeKillDeathRatio:
+                  type: number
+                  example: 0.789587852494577
+                magicKills:
+                  type: number
+                  example: 5
+                magicDeaths:
+                  type: number
+                  example: 37
+                magicKillDeathRatio:
+                  type: number
+                  example: 0.13513513513513514
+                fallKills:
+                  type: number
+                  example: 114
+                fallDeaths:
+                  type: number
+                  example: 88
+                fallKillDeathRatio:
+                  type: number
+                  example: 1.2954545454545454
+                resources:
+                  type: object
+                  properties:
+                    iron:
+                      type: number
+                      example: 201352
+                    gold:
+                      type: number
+                      example: 31477
+                    diamonds:
+                      type: number
+                      example: 2514
+                    emeralds:
+                      type: number
+                      example: 1779
+                itemsPurchased:
+                  type: number
+                  example: 1.2954545454545454
+                upgradesPurchased:
+                  type: number
+                  example: 1505
+                modes:
+                  type: object
+                  description: |-
+                    There are multiple mode stats but we are only providing examples for "solo".
+                    The mode stats are as follows: 
+
+                    solos, doubles, 3v3v3v3, 4v4v4v4, 4v4
+                  properties:
+                    solos:
+                      type: object
+                      properties:
+                        gamesPlayed:
+                          type: number
+                          example: 82
+                        winstreak:
+                          type: number
+                          example: 2
+                        wins:
+                          type: number
+                          example: 14
+                        losses:
+                          type: number
+                          example: 60
+                        winLossRatio:
+                          type: number
+                          example: 0.23333333333333334
+                        kills:
+                          type: number
+                          example: 157
+                        deaths:
+                          type: number
+                          example: 213
+                        killDeathRatio:
+                          type: number
+                          example: 0.7370892018779343
+                        killWinRatio:
+                          type: number
+                          example: 11.214285714285714
+                        killGameRatio:
+                          type: number
+                          example: 1.9146341463414633
+                        finalKills:
+                          type: number
+                          example: 102
+                        finalDeaths:
+                          type: number
+                          example: 51
+                        finalKillDeathRatio:
+                          type: number
+                          example: 2
+                        finalKillWinRatio:
+                          type: number
+                          example: 7.285714285714286
+                        finalKillGameRatio:
+                          type: number
+                          example: 1.2439024390243902
+                        bedsBroken:
+                          type: number
+                          example: 129
+                        bedsLost:
+                          type: number
+                          example: 54
+                        bedsBrokenBedsLostRatio:
+                          type: number
+                          example: 2.388888888888889
+                        bedsBrokenGameRatio:
+                          type: number
+                          example: 1.5731707317073171
+                        bedsBrokenWinRatio:
+                          type: number
+                          example: 9.214285714285714
+                        voidFinalKills:
+                          type: number
+                          example: 33
+                        voidFinalDeaths:
+                          type: number
+                          example: 21
+                        voidFinalKillDeathRatio:
+                          type: number
+                          example: 1.5714285714285714
+                        meleeFinalKills:
+                          type: number
+                          example: 68
+                        meleeFinalDeaths:
+                          type: number
+                          example: 27
+                        meleeFinalKillDeathRatio:
+                          type: number
+                          example: 2.5185185185185186
+                        magicFinalKills:
+                          type: number
+                          example: 1
+                        magicFinalDeaths:
+                          type: number
+                          example: 3
+                        magicFinalKillDeathRatio:
+                          type: number
+                          example: 0.3333333333333333
+                        fallFinalKills:
+                          type: number
+                          example: 0
+                        fallFinalDeaths:
+                          type: number
+                          example: 0
+                        fallFinalKillDeathRatio:
+                          type: number
+                          example: 0
+                        voidKills:
+                          type: number
+                          example: 71
+                        voidDeaths:
+                          type: number
+                          example: 144
+                        voidKillDeathRatio:
+                          type: number
+                          example: 0.4930555555555556
+                        meleeKills:
+                          type: number
+                          example: 75
+                        meleeDeaths:
+                          type: number
+                          example: 55
+                        meleeKillDeathRatio:
+                          type: number
+                          example: 1.3636363636363635
+                        magicKills:
+                          type: number
+                          example: 1
+                        magicDeaths:
+                          type: number
+                          example: 7
+                        magicKillDeathRatio:
+                          type: number
+                          example: 0.14285714285714285
+                        fallKills:
+                          type: number
+                          example: 4
+                        fallDeaths:
+                          type: number
+                          example: 5
+                        fallKillDeathRatio:
+                          type: number
+                          example: 0.8
+                        resources:
+                          type: object
+                          properties:
+                            iron:
+                              type: number
+                              example: 13666
+                            gold:
+                              type: number
+                              example: 3221
+                            diamonds:
+                              type: number
+                              example: 472
+                            emeralds:
+                              type: number
+                              example: 269
+                        itemsPurchased:
+                          type: number
+                          example: 2520
+                        upgradesPurchased:
+                          type: number
+                          example: 106
             buildBattle:
               type: object
               properties:
